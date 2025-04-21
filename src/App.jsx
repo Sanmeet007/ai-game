@@ -2,25 +2,24 @@ import React, { useState } from "react";
 import PuzzleGrid from "./components/PuzzleGrid";
 import Controls from "./components/Controls";
 import PuzzleSolver from "./utils/solver";
+import { animatePath } from "./utils/path-animator";
 
 const initialBoard = PuzzleSolver.getRandomState();
 
 const App = () => {
   const [board, setBoard] = useState(initialBoard);
-  const [solutionPath, setSolutionPath] = useState(null);
   const [isSolved, setIsSolved] = useState(false);
 
   const handleShuffle = () => {
     const shuffledBoard = PuzzleSolver.shuffle(board);
     setBoard(shuffledBoard);
-    setSolutionPath(null);
     setIsSolved(false);
   };
 
   const handleSolve = async () => {
     const path = await PuzzleSolver.solve(board);
-    setSolutionPath(path);
-    setIsSolved(false);
+    await animatePath(path, setBoard);
+    setIsSolved(true);
   };
 
   const handleBoardUpdate = (newBoard) => {
@@ -34,7 +33,6 @@ const App = () => {
       <PuzzleGrid
         board={board}
         setBoard={handleBoardUpdate}
-        solutionPath={solutionPath}
         isSolved={isSolved}
       />
       <Controls
