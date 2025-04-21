@@ -14,7 +14,6 @@ const Controls = ({ onShuffle, onSolve, onReset, isSolved }) => {
         onClick={onSolve}
         disabled={isSolved}
         style={{
-          background: isSolved ? "#ccc" : "#007bff",
           cursor: isSolved ? "not-allowed" : "pointer",
         }}
       >
