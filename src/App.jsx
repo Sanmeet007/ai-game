@@ -7,18 +7,13 @@ import { animatePath } from "./utils/path-animator";
 const initialBoard = PuzzleSolver.getRandomState();
 
 const App = () => {
-  const initialBoard = [
-    [1, 2, 3],
-    [4, 5, 6],
-    [7, 8, 0],
-  ];
   const [board, setBoard] = useState(initialBoard);
   const [isSolved, setIsSolved] = useState(false);
   const [level, setLevel] = useState(1);
 
   const handleShuffle = () => {
     const shuffleMoves = level === 1 ? 20 : 50;
-    const shuffledBoard = shufflePuzzle(board, shuffleMoves);
+    const shuffledBoard = PuzzleSolver.shuffle(board, shuffleMoves);
     setBoard(shuffledBoard);
     setIsSolved(false);
   };
@@ -31,7 +26,7 @@ const App = () => {
 
   const handleBoardUpdate = (newBoard) => {
     setBoard(newBoard);
-    const solved = isPuzzleSolved(newBoard);
+    const solved = PuzzleSolver.isSolved(newBoard);
     setIsSolved(solved);
 
     if (solved && level < 2) {
