@@ -1,7 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useEffect } from "react";
 
 const PuzzleGrid = ({ board, setBoard, solutionPath, isSolved, level }) => {
-  // Handle tile click to move (only if adjacent to empty tile)
   const handleTileClick = (row, col) => {
     if (isSolved) return;
     const newBoard = JSON.parse(JSON.stringify(board));
@@ -10,13 +9,12 @@ const PuzzleGrid = ({ board, setBoard, solutionPath, isSolved, level }) => {
     if (isAdjacent({ row, col }, emptyPos)) {
       [newBoard[row][col], newBoard[emptyPos.row][emptyPos.col]] = [
         newBoard[emptyPos.row][emptyPos.col],
-        newBoard[row][col]
+        newBoard[row][col],
       ];
       setBoard(newBoard);
     }
   };
 
-  // Find position of empty tile (0)
   const findEmptyTile = (board) => {
     for (let i = 0; i < board.length; i++) {
       for (let j = 0; j < board[i].length; j++) {
@@ -26,7 +24,6 @@ const PuzzleGrid = ({ board, setBoard, solutionPath, isSolved, level }) => {
     return null;
   };
 
-  // Check if two positions are adjacent
   const isAdjacent = (pos1, pos2) => {
     return (
       (Math.abs(pos1.row - pos2.row) === 1 && pos1.col === pos2.col) ||
@@ -34,7 +31,6 @@ const PuzzleGrid = ({ board, setBoard, solutionPath, isSolved, level }) => {
     );
   };
 
-  // Animate solution path
   useEffect(() => {
     if (solutionPath && !isSolved) {
       let index = 0;
@@ -50,55 +46,83 @@ const PuzzleGrid = ({ board, setBoard, solutionPath, isSolved, level }) => {
     }
   }, [solutionPath, setBoard, isSolved]);
 
-  // Validate board prop
-  if (!board || !Array.isArray(board) || board.length !== 3 || board.some(row => row.length !== 3)) {
-    return <div style={{ color: '#ff4d4d', fontFamily: "'Poppins', sans-serif", fontSize: '20px' }}>Error: Invalid puzzle board</div>;
+  if (
+    !board ||
+    !Array.isArray(board) ||
+    board.length !== 3 ||
+    board.some((row) => row.length !== 3)
+  ) {
+    return (
+      <div
+        style={{
+          color: "#ff4d4d",
+          fontFamily: "'Poppins', sans-serif",
+          fontSize: "20px",
+        }}
+      >
+        Error: Invalid puzzle board
+      </div>
+    );
   }
 
-  // Level-specific styling
   const levelStyles = {
     1: {
-      background: 'linear-gradient(135deg, #1a1a1a, #2c2c2c)',
-      boxShadow: '0 0 20px rgba(0, 255, 255, 0.7), 0 0 40px rgba(255, 0, 255, 0.5)',
+      background: "linear-gradient(135deg, #1a1a1a, #2c2c2c)",
+      boxShadow:
+        "0 0 20px rgba(0, 255, 255, 0.7), 0 0 40px rgba(255, 0, 255, 0.5)",
     },
     2: {
-      background: 'linear-gradient(135deg, #2c2c2c, #4a1a4a)', // Darker, purple-tinted for higher difficulty
-      boxShadow: '0 0 25px rgba(255, 0, 255, 0.8), 0 0 50px rgba(0, 255, 255, 0.6)', // More intense glow
-    }
+      background: "linear-gradient(135deg, #2c2c2c, #4a1a4a)",
+      boxShadow:
+        "0 0 25px rgba(255, 0, 255, 0.8), 0 0 50px rgba(0, 255, 255, 0.6)",
+    },
   };
 
   return (
     <div
       style={{
-        display: 'inline-block',
-        padding: '20px',
-        borderRadius: '15px',
-        margin: '0 auto',
+        display: "inline-block",
+        padding: "20px",
+        borderRadius: "15px",
+        margin: "0 auto",
         ...levelStyles[level],
-        transition: 'background 0.5s, box-shadow 0.5s', // Smooth transition for level changes
+        transition: "background 0.5s, box-shadow 0.5s",
       }}
     >
-      <div style={{ border: '2px solid rgba(255, 255, 255, 0.2)', borderRadius: '10px', overflow: 'hidden' }}>
+      <div
+        style={{
+          border: "2px solid rgba(255, 255, 255, 0.2)",
+          borderRadius: "10px",
+          overflow: "hidden",
+        }}
+      >
         {board.map((row, rowIndex) => (
-          <div key={rowIndex} style={{ display: 'flex', gap: '' }}>
+          <div key={rowIndex} style={{ display: "flex", gap: "" }}>
             {row.map((tile, colIndex) => (
               <div
                 key={`${rowIndex}-${colIndex}`}
-                onClick={() => tile !== 0 && handleTileClick(rowIndex, colIndex)}
+                onClick={() =>
+                  tile !== 0 && handleTileClick(rowIndex, colIndex)
+                }
                 style={{
-                  width: '80px',
-                  height: '80px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  cursor: tile !== 0 && !isSolved ? 'pointer' : 'default',
-                  transition: 'transform 0.2s, box-shadow 0.2s',
-                  transform: tile !== 0 && !isSolved ? 'scale(1)' : 'scale(0.95)',
-                  animation: isSolved && tile !== 0 ? 'pulse 1s infinite' : 'none',
+                  width: "80px",
+                  height: "80px",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  cursor: tile !== 0 && !isSolved ? "pointer" : "default",
+                  transition: "transform 0.2s, box-shadow 0.2s",
+                  transform:
+                    tile !== 0 && !isSolved ? "scale(1)" : "scale(0.95)",
+                  animation:
+                    isSolved && tile !== 0 ? "pulse 1s infinite" : "none",
                   backgroundImage: `url(/assets/frames/frame-${tile}.png)`,
-                  backgroundSize: '100% 100%',
-                  // Add level-specific tile glow
-                  boxShadow: level === 2 && tile !== 0 ? '0 0 10px rgba(255, 0, 255, 0.5)' : 'none',
+                  backgroundSize: "100% 100%",
+
+                  boxShadow:
+                    level === 2 && tile !== 0
+                      ? "0 0 10px rgba(255, 0, 255, 0.5)"
+                      : "none",
                 }}
               />
             ))}
@@ -108,13 +132,14 @@ const PuzzleGrid = ({ board, setBoard, solutionPath, isSolved, level }) => {
       {isSolved && (
         <p
           style={{
-            color: '#00ffcc',
-            fontSize: '28px',
+            color: "#00ffcc",
+            fontSize: "28px",
             fontFamily: "'Poppins', sans-serif",
-            fontWeight: '700',
-            marginTop: '20px',
-            textShadow: '0 0 10px rgba(0, 255, 255, 0.8), 0 0 20px rgba(255, 0, 255, 0.5)',
-            animation: 'fadeIn 0.5s',
+            fontWeight: "700",
+            marginTop: "20px",
+            textShadow:
+              "0 0 10px rgba(0, 255, 255, 0.8), 0 0 20px rgba(255, 0, 255, 0.5)",
+            animation: "fadeIn 0.5s",
           }}
         >
           Level {level} Solved!
@@ -124,8 +149,7 @@ const PuzzleGrid = ({ board, setBoard, solutionPath, isSolved, level }) => {
   );
 };
 
-// Inline keyframes for animations
-const styleSheet = document.createElement('style');
+const styleSheet = document.createElement("style");
 styleSheet.innerText = `
   @keyframes pulse {
     0% { transform: scale(1); box-shadow: 0 0 15px rgba(0, 255, 255, 0.5), 0 0 25px rgba(255, 0, 255, 0.3); }
