@@ -5,6 +5,8 @@ import PuzzleSolver from "./utils/solver";
 import { animatePath } from "./utils/path-animator";
 import { useLevelContext } from "./providers/LevelProvider";
 
+import "./App.css";
+
 const initialBoard = PuzzleSolver.getRandomState();
 
 const App = () => {
@@ -32,7 +34,9 @@ const App = () => {
 
     if (solved && currentLevel < 2) {
       setTimeout(() => {
-        alert(`Level ${currentLevel} completed! Moving to Level ${currentLevel + 1}`);
+        alert(
+          `Level ${currentLevel} completed! Moving to Level ${currentLevel + 1}`
+        );
         setCurrentLevel(currentLevel + 1);
         handleShuffle();
       }, 500);
@@ -49,7 +53,7 @@ const App = () => {
 
   return (
     <div style={{ textAlign: "center", padding: "20px" }}>
-      <h1>Puzzle Solver - Level {currentLevel}</h1>
+      <h1>Puzzle Solver</h1>
       <PuzzleGrid
         board={board}
         setBoard={handleBoardUpdate}

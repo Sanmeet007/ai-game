@@ -85,13 +85,15 @@ const PuzzleGrid = ({ board, setBoard, solutionPath, isSolved, level }) => {
         padding: "20px",
         borderRadius: "15px",
         margin: "0 auto",
+        backgroundColor: "rgb(50, 62, 37)",
+        // animation: isSolved ? "pulse 1s infinite" : "none",
         ...levelStyles[level],
         transition: "background 0.5s, box-shadow 0.5s",
       }}
     >
       <div
         style={{
-          border: "2px solid rgba(255, 255, 255, 0.2)",
+          border: "2px solid rgba(255, 255, 255, 0.16)",
           borderRadius: "10px",
           overflow: "hidden",
         }}
@@ -112,13 +114,9 @@ const PuzzleGrid = ({ board, setBoard, solutionPath, isSolved, level }) => {
                   justifyContent: "center",
                   cursor: tile !== 0 && !isSolved ? "pointer" : "default",
                   transition: "transform 0.2s, box-shadow 0.2s",
-                  transform:
-                    tile !== 0 && !isSolved ? "scale(1)" : "scale(0.95)",
-                  animation:
-                    isSolved && tile !== 0 ? "pulse 1s infinite" : "none",
+                  transform: tile !== 0 ? "scale(1)" : "scale(0.95)",
                   backgroundImage: `url(/assets/frames/frame-${tile}.png)`,
                   backgroundSize: "100% 100%",
-
                   boxShadow:
                     level === 2 && tile !== 0
                       ? "0 0 10px rgba(255, 0, 255, 0.5)"
@@ -148,19 +146,5 @@ const PuzzleGrid = ({ board, setBoard, solutionPath, isSolved, level }) => {
     </div>
   );
 };
-
-const styleSheet = document.createElement("style");
-styleSheet.innerText = `
-  @keyframes pulse {
-    0% { transform: scale(1); box-shadow: 0 0 15px rgba(0, 255, 255, 0.5), 0 0 25px rgba(255, 0, 255, 0.3); }
-    50% { transform: scale(1.05); box-shadow: 0 0 25px rgba(0, 255, 255, 0.7), 0 0 35px rgba(255, 0, 255, 0.5); }
-    100% { transform: scale(1); box-shadow: 0 0 15px rgba(0, 255, 255, 0.5), 0 0 25px rgba(255, 0, 255, 0.3); }
-  }
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-`;
-document.head.appendChild(styleSheet);
 
 export default PuzzleGrid;
