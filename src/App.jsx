@@ -52,11 +52,12 @@ const App = () => {
 
   return (
     <div className="game-wrapper">
-      <LogoText width={180} height={40}/>
+      <LogoText width={180} height={40} />
       <PuzzleGrid
         board={board}
         setBoard={handleBoardUpdate}
         isSolved={isSolved}
+        resetGame={handleReset}
       />
       <Controls
         onShuffle={handleShuffle}

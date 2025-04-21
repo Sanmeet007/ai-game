@@ -61,7 +61,7 @@ button:hover {
   border-color: #d8f295;
   transform: scale(1.05);
 }
-button:focus,
+/* button:focus, */
 button:focus-visible {
   outline: 3px solid #d8f295;
 }
@@ -201,4 +201,32 @@ button {
   flex-direction: column;
   gap: 1rem;
   align-items: center;
+}
+
+.congrats-tile {
+  color: rgb(232, 255, 164);
+  font-size: 1.5rem;
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  padding: 5rem;
+  justify-content: center;
+  border-radius: 60% 40% 30% 70% / 50% 60% 40% 50%;
+  animation: fadeIn 0.5s;
+  background-color: #1a1a1a86;
+  backdrop-filter: blur(20px);
+}
+
+.play-again-btn {
+  background-color: #e8ffa4;
+  color: black;
+}
+
+.play-again-btn:hover {
+  background-color: #b1c37c;
+  border-color: #e3ff8e;
+  transform: scale(1.05);
 }

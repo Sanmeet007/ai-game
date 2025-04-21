@@ -1,6 +1,14 @@
 import React, { useEffect } from "react";
+import { FaHandsClapping } from "react-icons/fa6";
 
-const PuzzleGrid = ({ board, setBoard, solutionPath, isSolved, level }) => {
+const PuzzleGrid = ({
+  board,
+  setBoard,
+  solutionPath,
+  isSolved,
+  resetGame,
+  level,
+}) => {
   const handleTileClick = (row, col) => {
     if (isSolved) return;
     const newBoard = JSON.parse(JSON.stringify(board));
@@ -79,63 +87,78 @@ const PuzzleGrid = ({ board, setBoard, solutionPath, isSolved, level }) => {
   };
 
   return (
-    <div
-      style={{
-        "--tile-size": "8rem",
-        animation: isSolved ? "pulse 1s" : "none",
-        ...levelStyles[level],
-      }}
-      className="puzzle-grid"
-    >
+    <>
       <div
         style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(3 ,var(--tile-size))",
-          gridTemplateRows: "repeat(3 ,var(--tile-size))",
-          border: "2px solid rgba(255, 255, 255, 0.16)",
-          borderRadius: "10px",
-          overflow: "hidden",
+          "--tile-size": "8rem",
+          animation: isSolved ? "pulse 1s" : "none",
+          ...levelStyles[level],
         }}
+        className="puzzle-grid"
       >
-        {board.map((row, rowIndex) =>
-          row.map((tile, colIndex) => (
-            <div
-              key={`${rowIndex}-${colIndex}`}
-              onClick={() => tile !== 0 && handleTileClick(rowIndex, colIndex)}
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                cursor: tile !== 0 && !isSolved ? "pointer" : "default",
-                transition: "transform 0.2s, box-shadow 0.2s",
-                transform: tile !== 0 ? "scale(1)" : "scale(0.95)",
-                backgroundImage: `url(/assets/frames/frame-${tile}.png)`,
-                backgroundSize: "100% 100%",
-                boxShadow:
-                  level === 2 && tile !== 0
-                    ? "0 0 10px rgba(255, 0, 255, 0.5)"
-                    : "none",
-              }}
-            />
-          ))
-        )}
-      </div>
-      {isSolved && (
-        <p
+        <div
           style={{
-            color: "rgb(232 ,255 ,164)",
-            fontSize: "1.5rem",
-            margin: "0 0",
-            marginTop: "1rem",
-            fontFamily: "'Poppins', sans-serif",
-            fontWeight: "700",
-            animation: "fadeIn 0.5s",
+            display: "grid",
+            gridTemplateColumns: "repeat(3 ,var(--tile-size))",
+            gridTemplateRows: "repeat(3 ,var(--tile-size))",
+            border: "2px solid rgba(255, 255, 255, 0.16)",
+            borderRadius: "10px",
+            overflow: "hidden",
           }}
         >
-          Level Solved!
-        </p>
+          {board.map((row, rowIndex) =>
+            row.map((tile, colIndex) => (
+              <div
+                key={`${rowIndex}-${colIndex}`}
+                onClick={() =>
+                  tile !== 0 && handleTileClick(rowIndex, colIndex)
+                }
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  cursor: tile !== 0 && !isSolved ? "pointer" : "default",
+                  transition: "transform 0.2s, box-shadow 0.2s",
+                  transform: tile !== 0 ? "scale(1)" : "scale(0.95)",
+                  backgroundImage: `url(/assets/frames/frame-${tile}.png)`,
+                  backgroundSize: "100% 100%",
+                  boxShadow:
+                    level === 2 && tile !== 0
+                      ? "0 0 10px rgba(255, 0, 255, 0.5)"
+                      : "none",
+                }}
+              />
+            ))
+          )}
+        </div>
+      </div>
+
+      {isSolved && (
+        <div
+          style={{
+            position: "fixed",
+            top: 0,
+            height: "100vh",
+            width: "100vw",
+            backgroundColor: "rgba(0, 0, 0, 0.56)",
+            display: "flex",
+            flexDirection: "column",
+            gap: "1rem",
+            alignItems: "center",
+            justifyContent: "center",
+            zIndex: 1000,
+          }}
+        >
+          <div className="congrats-tile">
+            <FaHandsClapping />
+            Level Solved!
+          </div>
+          <button className="play-again-btn" onClick={resetGame}>
+            PLAY AGAIN
+          </button>
+        </div>
       )}
-    </div>
+    </>
   );
 };
 
