@@ -1,37 +1,28 @@
-
-import React from 'react';
+import React from "react";
+import { RiResetLeftLine } from "react-icons/ri";
+import { MdAutoFixHigh } from "react-icons/md";
+import { CiShuffle } from "react-icons/ci";
 
 const Controls = ({ onShuffle, onSolve, onReset, isSolved }) => {
   return (
-    <div style={{ marginTop: '20px'}}>
-      <button
-        onClick={onShuffle}
-        style={{ marginRight: '10px', padding: '10px 20px' }}
-      >
+    <div className="controller-wrapper">
+      <button onClick={onShuffle}>
+        <CiShuffle />
         Shuffle
       </button>
       <button
         onClick={onSolve}
         disabled={isSolved}
         style={{
-          marginRight: '10px',
-          padding: '10px 20px',
-          background: isSolved ? '#ccc' : '#007bff',
-          color: 'white',
-          cursor: isSolved ? 'not-allowed' : 'pointer'
+          background: isSolved ? "#ccc" : "#007bff",
+          cursor: isSolved ? "not-allowed" : "pointer",
         }}
       >
+        <MdAutoFixHigh />
         Solve
       </button>
-      <button
-        onClick={onReset}
-        style={{
-          padding: '10px 20px',
-          background: '#ff4d4d',
-          color: 'white',
-          cursor: 'pointer'
-        }}
-      >
+      <button className="secondary" onClick={onReset}>
+        <RiResetLeftLine />
         Reset Game
       </button>
     </div>

@@ -81,51 +81,44 @@ const PuzzleGrid = ({ board, setBoard, solutionPath, isSolved, level }) => {
   return (
     <div
       style={{
-        display: "inline-block",
-        padding: "20px",
-        borderRadius: "15px",
-        margin: "0 auto",
+        "--tile-size": "8rem",
         animation: isSolved ? "pulse 1s" : "none",
         ...levelStyles[level],
-        transition: "background 0.5s, box-shadow 0.5s",
       }}
       className="puzzle-grid"
     >
       <div
         style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(3 ,var(--tile-size))",
+          gridTemplateRows: "repeat(3 ,var(--tile-size))",
           border: "2px solid rgba(255, 255, 255, 0.16)",
           borderRadius: "10px",
           overflow: "hidden",
         }}
       >
-        {board.map((row, rowIndex) => (
-          <div key={rowIndex} style={{ display: "flex", gap: "" }}>
-            {row.map((tile, colIndex) => (
-              <div
-                key={`${rowIndex}-${colIndex}`}
-                onClick={() =>
-                  tile !== 0 && handleTileClick(rowIndex, colIndex)
-                }
-                style={{
-                  width: "80px",
-                  height: "80px",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  cursor: tile !== 0 && !isSolved ? "pointer" : "default",
-                  transition: "transform 0.2s, box-shadow 0.2s",
-                  transform: tile !== 0 ? "scale(1)" : "scale(0.95)",
-                  backgroundImage: `url(/assets/frames/frame-${tile}.png)`,
-                  backgroundSize: "100% 100%",
-                  boxShadow:
-                    level === 2 && tile !== 0
-                      ? "0 0 10px rgba(255, 0, 255, 0.5)"
-                      : "none",
-                }}
-              />
-            ))}
-          </div>
-        ))}
+        {board.map((row, rowIndex) =>
+          row.map((tile, colIndex) => (
+            <div
+              key={`${rowIndex}-${colIndex}`}
+              onClick={() => tile !== 0 && handleTileClick(rowIndex, colIndex)}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                cursor: tile !== 0 && !isSolved ? "pointer" : "default",
+                transition: "transform 0.2s, box-shadow 0.2s",
+                transform: tile !== 0 ? "scale(1)" : "scale(0.95)",
+                backgroundImage: `url(/assets/frames/frame-${tile}.png)`,
+                backgroundSize: "100% 100%",
+                boxShadow:
+                  level === 2 && tile !== 0
+                    ? "0 0 10px rgba(255, 0, 255, 0.5)"
+                    : "none",
+              }}
+            />
+          ))
+        )}
       </div>
       {isSolved && (
         <p
