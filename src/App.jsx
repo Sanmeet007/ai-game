@@ -53,7 +53,7 @@ const App = () => {
 
   return (
     <div style={{ textAlign: "center", padding: "20px" }}>
-      <h1>Puzzle Solver</h1>
+      <h1>PUZZLE SOLVER</h1>
       <PuzzleGrid
         board={board}
         setBoard={handleBoardUpdate}
