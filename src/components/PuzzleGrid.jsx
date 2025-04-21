@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect } from "react";
 
 const PuzzleGrid = ({ board, setBoard, solutionPath, isSolved }) => {
   // Handle tile click to move (only if adjacent to empty tile)
@@ -10,7 +10,7 @@ const PuzzleGrid = ({ board, setBoard, solutionPath, isSolved }) => {
     if (isAdjacent({ row, col }, emptyPos)) {
       [newBoard[row][col], newBoard[emptyPos.row][emptyPos.col]] = [
         newBoard[emptyPos.row][emptyPos.col],
-        newBoard[row][col]
+        newBoard[row][col],
       ];
       setBoard(newBoard);
     }
@@ -51,45 +51,67 @@ const PuzzleGrid = ({ board, setBoard, solutionPath, isSolved }) => {
   }, [solutionPath, setBoard, isSolved]);
 
   // Validate board prop
-  if (!board || !Array.isArray(board) || board.length !== 3 || board.some(row => row.length !== 3)) {
-    return <div style={{ color: '#ff4d4d', fontFamily: "'Poppins', sans-serif", fontSize: '20px' }}>Error: Invalid puzzle board</div>;
+  if (
+    !board ||
+    !Array.isArray(board) ||
+    board.length !== 3 ||
+    board.some((row) => row.length !== 3)
+  ) {
+    return (
+      <div
+        style={{
+          color: "#ff4d4d",
+          fontFamily: "'Poppins', sans-serif",
+          fontSize: "20px",
+        }}
+      >
+        Error: Invalid puzzle board
+      </div>
+    );
   }
 
   return (
     <div
       style={{
-        display: 'inline-block',
-        padding: '20px',
-        background: 'linear-gradient(135deg, #1a1a1a, #2c2c2c)',
-        borderRadius: '15px',
-        boxShadow: '0 0 20px rgba(0, 255, 255, 0.7), 0 0 40px rgba(255, 0, 255, 0.5)',
-        margin: '0 auto',
+        display: "inline-block",
+        padding: "20px",
+        background: "linear-gradient(135deg, #1a1a1a, #2c2c2c)",
+        borderRadius: "15px",
+        border: "1px solid grey",
+        margin: "0 auto",
       }}
     >
-      <div style={{ border: '2px solid rgba(255, 255, 255, 0.2)', borderRadius: '10px', overflow: 'hidden' }}>
+      <div
+        style={{
+          border: "2px solid rgba(255, 255, 255, 0.2)",
+          borderRadius: "10px",
+          overflow: "hidden",
+        }}
+      >
         {board.map((row, rowIndex) => (
-          <div key={rowIndex} style={{ display: 'flex' , gap:"" }}>
+          <div key={rowIndex} style={{ display: "flex", gap: "" }}>
             {row.map((tile, colIndex) => (
               <div
                 key={`${rowIndex}-${colIndex}`}
-                onClick={() => tile !== 0 && handleTileClick(rowIndex, colIndex)}
+                onClick={() =>
+                  tile !== 0 && handleTileClick(rowIndex, colIndex)
+                }
                 style={{
-                  width: '80px',
-                  height: '80px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  cursor: tile !== 0 && !isSolved ? 'pointer' : 'default',
-                  transition: 'transform 0.2s, box-shadow 0.2s',
-                  transform: tile !== 0 && !isSolved ? 'scale(1)' : 'scale(0.95)',
-                  animation: isSolved && tile !== 0 ? 'pulse 1s infinite' : 'none',
-                  backgroundImage : `url(/assets/frames/frame-${tile}.png)`,
-                  backgroundSize: "100% 100%"
-                
+                  width: "80px",
+                  height: "80px",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  cursor: tile !== 0 && !isSolved ? "pointer" : "default",
+                  transition: "transform 0.2s, box-shadow 0.2s",
+                  transform:
+                    tile !== 0 && !isSolved ? "scale(1)" : "scale(0.95)",
+                  animation:
+                    isSolved && tile !== 0 ? "pulse 1s infinite" : "none",
+                  backgroundImage: `url(/assets/frames/frame-${tile}.png)`,
+                  backgroundSize: "100% 100%",
                 }}
-              >
-                
-              </div>
+              ></div>
             ))}
           </div>
         ))}
@@ -97,13 +119,14 @@ const PuzzleGrid = ({ board, setBoard, solutionPath, isSolved }) => {
       {isSolved && (
         <p
           style={{
-            color: '#00ffcc',
-            fontSize: '28px',
+            color: "#00ffcc",
+            fontSize: "28px",
             fontFamily: "'Poppins', sans-serif",
-            fontWeight: '700',
-            marginTop: '20px',
-            textShadow: '0 0 10px rgba(0, 255, 255, 0.8), 0 0 20px rgba(255, 0, 255, 0.5)',
-            animation: 'fadeIn 0.5s',
+            fontWeight: "700",
+            marginTop: "20px",
+            textShadow:
+              "0 0 10px rgba(0, 255, 255, 0.8), 0 0 20px rgba(255, 0, 255, 0.5)",
+            animation: "fadeIn 0.5s",
           }}
         >
           Solved!
@@ -114,7 +137,7 @@ const PuzzleGrid = ({ board, setBoard, solutionPath, isSolved }) => {
 };
 
 // Inline keyframes for animations
-const styleSheet = document.createElement('style');
+const styleSheet = document.createElement("style");
 styleSheet.innerText = `
   @keyframes pulse {
     0% { transform: scale(1); box-shadow: 0 0 15px rgba(0, 255, 255, 0.5), 0 0 25px rgba(255, 0, 255, 0.3); }
