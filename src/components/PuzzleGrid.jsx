@@ -91,7 +91,7 @@ const PuzzleGrid = ({
       <div
         style={{
           "--tile-size": "8rem",
-          animation: isSolved ? "pulse 1s" : "none",
+          animation: isSolved ? "glow 1s infinite alternate" : "none",
           ...levelStyles[level],
         }}
         className="puzzle-grid"
@@ -109,6 +109,7 @@ const PuzzleGrid = ({
           {board.map((row, rowIndex) =>
             row.map((tile, colIndex) => (
               <div
+                className="board-tile"
                 key={`${rowIndex}-${colIndex}`}
                 onClick={() =>
                   tile !== 0 && handleTileClick(rowIndex, colIndex)
@@ -119,15 +120,15 @@ const PuzzleGrid = ({
                   justifyContent: "center",
                   cursor: tile !== 0 && !isSolved ? "pointer" : "default",
                   transition: "transform 0.2s, box-shadow 0.2s",
-                  transform: tile !== 0 ? "scale(1)" : "scale(0.95)",
-                  backgroundImage: `url(/assets/frames/frame-${tile}.png)`,
+                  transform:
+                    tile !== 0 || isSolved ? "scale(1)" : "scale(0.95)",
+                  backgroundImage:
+                    isSolved && tile === 0
+                      ? `url(/assets/frames/frame-9.png)`
+                      : `url(/assets/frames/frame-${tile}.png)`,
                   backgroundSize: "100% 100%",
-                  boxShadow:
-                    level === 2 && tile !== 0
-                      ? "0 0 10px rgba(255, 0, 255, 0.5)"
-                      : "none",
                 }}
-              />
+              ></div>
             ))
           )}
         </div>
