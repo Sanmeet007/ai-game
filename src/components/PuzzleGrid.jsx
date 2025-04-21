@@ -127,7 +127,7 @@ const PuzzleGrid = ({ board, setBoard, solutionPath, isSolved, level }) => {
           </div>
         ))}
       </div>
-      {!isSolved && (
+      {isSolved && (
         <p
           style={{
             color: "rgb(232 ,255 ,164)",
