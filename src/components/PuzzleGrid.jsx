@@ -68,7 +68,7 @@ const PuzzleGrid = ({ board, setBoard, solutionPath, isSolved }) => {
     >
       <div style={{ border: '2px solid rgba(255, 255, 255, 0.2)', borderRadius: '10px', overflow: 'hidden' }}>
         {board.map((row, rowIndex) => (
-          <div key={rowIndex} style={{ display: 'flex' }}>
+          <div key={rowIndex} style={{ display: 'flex' , gap:"" }}>
             {row.map((tile, colIndex) => (
               <div
                 key={`${rowIndex}-${colIndex}`}
@@ -76,29 +76,19 @@ const PuzzleGrid = ({ board, setBoard, solutionPath, isSolved }) => {
                 style={{
                   width: '80px',
                   height: '80px',
-                  background:
-                    tile === 0
-                      ? 'transparent'
-                      : isSolved
-                      ? 'linear-gradient(45deg, #00ffcc, #00cc99)'
-                      : 'linear-gradient(45deg, #ff00cc, #3333ff)',
-                  border: '1px solid rgba(255, 255, 255, 0.3)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   cursor: tile !== 0 && !isSolved ? 'pointer' : 'default',
-                  fontSize: '24px',
-                  fontFamily: "'Poppins', sans-serif",
-                  fontWeight: '600',
-                  color: '#fff',
-                  textShadow: '0 0 10px rgba(255, 255, 255, 0.8)',
-                  boxShadow: tile !== 0 ? '0 0 15px rgba(0, 255, 255, 0.5), 0 0 25px rgba(255, 0, 255, 0.3)' : 'none',
                   transition: 'transform 0.2s, box-shadow 0.2s',
                   transform: tile !== 0 && !isSolved ? 'scale(1)' : 'scale(0.95)',
                   animation: isSolved && tile !== 0 ? 'pulse 1s infinite' : 'none',
+                  backgroundImage : `url(/assets/frames/frame-${tile}.png)`,
+                  backgroundSize: "100% 100%"
+                
                 }}
               >
-                {tile !== 0 && tile}
+                
               </div>
             ))}
           </div>
