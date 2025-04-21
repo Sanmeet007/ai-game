@@ -85,11 +85,11 @@ const PuzzleGrid = ({ board, setBoard, solutionPath, isSolved, level }) => {
         padding: "20px",
         borderRadius: "15px",
         margin: "0 auto",
-        backgroundColor: "rgb(50, 62, 37)",
-        // animation: isSolved ? "pulse 1s infinite" : "none",
+        animation: isSolved ? "pulse 1s" : "none",
         ...levelStyles[level],
         transition: "background 0.5s, box-shadow 0.5s",
       }}
+      className="puzzle-grid"
     >
       <div
         style={{
@@ -127,20 +127,19 @@ const PuzzleGrid = ({ board, setBoard, solutionPath, isSolved, level }) => {
           </div>
         ))}
       </div>
-      {isSolved && (
+      {!isSolved && (
         <p
           style={{
-            color: "#00ffcc",
-            fontSize: "28px",
+            color: "rgb(232 ,255 ,164)",
+            fontSize: "1.5rem",
+            margin: "0 0",
+            marginTop: "1rem",
             fontFamily: "'Poppins', sans-serif",
             fontWeight: "700",
-            marginTop: "20px",
-            textShadow:
-              "0 0 10px rgba(0, 255, 255, 0.8), 0 0 20px rgba(255, 0, 255, 0.5)",
             animation: "fadeIn 0.5s",
           }}
         >
-          Level {level} Solved!
+          Level Solved!
         </p>
       )}
     </div>

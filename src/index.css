@@ -1,5 +1,5 @@
 :root {
-  font-family: 'Segoe UI', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Segoe UI", system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
@@ -21,29 +21,26 @@ body {
   flex-direction: column;
   min-width: 320px;
   min-height: 100vh;
-  background: linear-gradient(to bottom right, #1e1e1e, #2a2a2a);
+  background-image: linear-gradient(
+      to bottom right,
+      rgba(110, 118, 47, 0.877),
+      rgba(33, 42, 23, 0.928)
+    ),
+    url(/assets/background.png);
   color: white;
-}
-
-h1 {
-  font-size: 3rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-  text-align: center;
 }
 
 a {
   font-weight: 500;
-  color: #646cff;
+  color: #d8f295;
   text-decoration: none;
   transition: color 0.25s ease;
 }
 a:hover {
-  color: #535bf2;
+  color: #d8f295;
 }
 
 button {
-  border-radius: 10px;
   border: 1px solid transparent;
   padding: 0.7em 1.4em;
   font-size: 1rem;
@@ -57,12 +54,12 @@ button {
 }
 button:hover {
   background-color: #444;
-  border-color: #646cff;
+  border-color: #d8f295;
   transform: scale(1.05);
 }
 button:focus,
 button:focus-visible {
-  outline: 3px solid #646cff;
+  outline: 3px solid #d8f295;
 }
 
 @media (prefers-color-scheme: light) {
@@ -84,4 +81,79 @@ button:focus-visible {
   a:hover {
     color: #747bff;
   }
+}
+
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+button {
+  border-radius: 100px;
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.5), 0 0 25px rgba(255, 0, 255, 0.3);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 0 25px rgba(0, 255, 255, 0.7), 0 0 35px rgba(255, 0, 255, 0.5);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.puzzle-grid {
+  background-color: rgba(16, 21, 12, 0.154);
+  backdrop-filter: blur(1px);
 }

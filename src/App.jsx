@@ -5,8 +5,6 @@ import PuzzleSolver from "./utils/solver";
 import { animatePath } from "./utils/path-animator";
 import { useLevelContext } from "./providers/LevelProvider";
 
-import "./App.css";
-
 const initialBoard = PuzzleSolver.getRandomState();
 
 const App = () => {
@@ -53,7 +51,7 @@ const App = () => {
 
   return (
     <div style={{ textAlign: "center", padding: "20px" }}>
-      <h1>PUZZLE SOLVER</h1>
+      <h1>GridRush</h1>
       <PuzzleGrid
         board={board}
         setBoard={handleBoardUpdate}

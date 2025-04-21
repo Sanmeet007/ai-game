@@ -3,7 +3,7 @@ import React from 'react';
 
 const Controls = ({ onShuffle, onSolve, onReset, isSolved }) => {
   return (
-    <div style={{ marginTop: '20px' }}>
+    <div style={{ marginTop: '20px'}}>
       <button
         onClick={onShuffle}
         style={{ marginRight: '10px', padding: '10px 20px' }}
