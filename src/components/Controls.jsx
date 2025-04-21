@@ -1,6 +1,7 @@
+
 import React from 'react';
 
-const Controls = ({ onShuffle, onSolve, isSolved }) => {
+const Controls = ({ onShuffle, onSolve, onReset, isSolved }) => {
   return (
     <div style={{ marginTop: '20px' }}>
       <button
@@ -13,6 +14,7 @@ const Controls = ({ onShuffle, onSolve, isSolved }) => {
         onClick={onSolve}
         disabled={isSolved}
         style={{
+          marginRight: '10px',
           padding: '10px 20px',
           background: isSolved ? '#ccc' : '#007bff',
           color: 'white',
@@ -20,6 +22,17 @@ const Controls = ({ onShuffle, onSolve, isSolved }) => {
         }}
       >
         Solve
+      </button>
+      <button
+        onClick={onReset}
+        style={{
+          padding: '10px 20px',
+          background: '#ff4d4d',
+          color: 'white',
+          cursor: 'pointer'
+        }}
+      >
+        Reset Game
       </button>
     </div>
   );
