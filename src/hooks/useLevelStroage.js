@@ -67,8 +67,11 @@ export function useLevelStorage(totalLevels = 5) {
   );
 
   const getLevelStats = useCallback(
-    (levelId) => stats.find((s) => s.level === levelId),
-    [stats]
+    (levelId) => {
+      const freshData = getStoredData();
+      return freshData.find((s) => s.level === levelId);
+    },
+    [getStoredData]
   );
 
   return {

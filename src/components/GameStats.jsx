@@ -1,11 +1,11 @@
 import { useLevelStorage } from "../hooks/useLevelStroage";
 import { useLevelContext } from "../providers/LevelProvider";
-import { formatSeconds, getLevelStats } from "../utils/level-fns";
+import { formatSeconds } from "../utils/level-fns";
 
 const GameStats = ({ movesPlayed, gamePlayedTime }) => {
-  const { stats } = useLevelStorage();
+  const { getLevelStats } = useLevelStorage();
   const { currentLevel, _ } = useLevelContext();
-  const currentLevelStats = getLevelStats(stats, currentLevel);
+  const currentLevelStats = getLevelStats(currentLevel);
 
   return (
     <>
