@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { FaHandsClapping } from "react-icons/fa6";
 
 const PuzzleGrid = ({
   board,
