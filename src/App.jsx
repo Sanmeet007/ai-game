@@ -60,6 +60,11 @@ const App = () => {
     setIsSolving(false);
 
     if (path === null) {
+      stopTimer();
+      setGamePlayedTime(0);
+      setMovesPlayed(0);
+      setIsSolved(false);      
+      
       alert("No solution available for this layout. Reset to continue playing.");
       return;
     }
