@@ -65,18 +65,6 @@ const App = () => {
     setBoard(newBoard);
     const solved = PuzzleSolver.isSolved(newBoard);
     setIsSolved(solved);
-
-    if (solved && currentLevel < 2) {
-      setTimeout(() => {
-        alert(
-          `Level ${currentLevel} completed! Moving to Level ${currentLevel + 1}`
-        );
-        setCurrentLevel(currentLevel + 1);
-        handleShuffle();
-      }, 500);
-    } else if (solved && currentLevel === 2) {
-      alert("Congratulations! You completed all levels!");
-    }
   };
 
   const handleReset = () => {
@@ -113,7 +101,7 @@ const App = () => {
     const selectedLevel = parseInt(e.target.value, 10);
 
     if (selectedLevel === currentLevel) return;
-    
+
     setCurrentLevel(selectedLevel);
     const newBoard = PuzzleSolver.getRandomState(
       levelDetails[selectedLevel].gridSize
