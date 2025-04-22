@@ -22,7 +22,7 @@ const Controls = ({ onShuffle, onSolve, onReset, isSolved }) => {
       </button>
       <button className="secondary" onClick={onReset}>
         <RiResetLeftLine />
-        Reset Game
+        Reset
       </button>
     </div>
   );

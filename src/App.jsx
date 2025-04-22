@@ -5,6 +5,10 @@ import PuzzleSolver from "./utils/solver";
 import { animatePath } from "./utils/path-animator";
 import { useLevelContext } from "./providers/LevelProvider";
 import LogoText from "./components/LogoText";
+import GameLayout from "./GameLayout";
+import { FaHandsClapping } from "react-icons/fa6";
+import GameStats from "./components/GameStats";
+import GameRules from "./components/GameRules";
 
 const initialBoard = PuzzleSolver.getRandomState();
 
@@ -12,6 +16,7 @@ const App = () => {
   const { currentLevel, setCurrentLevel } = useLevelContext();
   const [board, setBoard] = useState(initialBoard);
   const [isSolved, setIsSolved] = useState(false);
+  const [canPlay, setCanPlay] = useState(false);
 
   const handleShuffle = () => {
     const shuffleMoves = currentLevel === 1 ? 20 : 50;
@@ -48,24 +53,69 @@ const App = () => {
     setCurrentLevel(1);
     setBoard(initialBoard);
     setIsSolved(false);
+    setCanPlay(false);
+  };
+
+  const handleStartGame = () => {
+    setCanPlay(true);
+    console.log("lets go");
   };
 
   return (
-    <div className="game-wrapper">
-      <LogoText width={180} height={40} />
-      <PuzzleGrid
-        board={board}
-        setBoard={handleBoardUpdate}
-        isSolved={isSolved}
-        resetGame={handleReset}
-      />
-      <Controls
-        onShuffle={handleShuffle}
-        onSolve={handleSolve}
-        onReset={handleReset}
-        isSolved={isSolved}
-      />
-    </div>
+    <>
+      <GameLayout
+        sideComponent={
+          <>
+            <div className="game-bar">
+              <LogoText width={180} height={40} />
+              <GameRules />
+              <GameStats />
+              <Controls
+                onShuffle={handleShuffle}
+                onSolve={handleSolve}
+                onReset={handleReset}
+                isSolved={isSolved}
+              />
+            </div>
+          </>
+        }
+      >
+        <PuzzleGrid
+          startGame={handleStartGame}
+          canPlay={canPlay}
+          board={board}
+          setBoard={handleBoardUpdate}
+          isSolved={isSolved}
+          resetGame={handleReset}
+        />
+      </GameLayout>
+
+      {isSolved && (
+        <div
+          style={{
+            position: "fixed",
+            top: 0,
+            height: "100vh",
+            width: "100vw",
+            backgroundColor: "rgba(0, 0, 0, 0.56)",
+            display: "flex",
+            flexDirection: "column",
+            gap: "1rem",
+            alignItems: "center",
+            justifyContent: "center",
+            zIndex: 1000,
+          }}
+        >
+          <div className="congrats-tile">
+            <FaHandsClapping />
+            Level Solved!
+          </div>
+          <button className="play-again-btn" onClick={handleReset}>
+            PLAY AGAIN
+          </button>
+        </div>
+      )}
+    </>
   );
 };
 

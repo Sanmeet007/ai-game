@@ -6,8 +6,8 @@ const PuzzleGrid = ({
   setBoard,
   solutionPath,
   isSolved,
-  resetGame,
-  level,
+  canPlay,
+  startGame,
 }) => {
   const handleTileClick = (row, col) => {
     if (isSolved) return;
@@ -73,26 +73,11 @@ const PuzzleGrid = ({
     );
   }
 
-  const levelStyles = {
-    1: {
-      background: "linear-gradient(135deg, #1a1a1a, #2c2c2c)",
-      boxShadow:
-        "0 0 20px rgba(0, 255, 255, 0.7), 0 0 40px rgba(255, 0, 255, 0.5)",
-    },
-    2: {
-      background: "linear-gradient(135deg, #2c2c2c, #4a1a4a)",
-      boxShadow:
-        "0 0 25px rgba(255, 0, 255, 0.8), 0 0 50px rgba(0, 255, 255, 0.6)",
-    },
-  };
-
   return (
     <>
       <div
         style={{
-          "--tile-size": "8rem",
           animation: isSolved ? "glow 1s infinite alternate" : "none",
-          ...levelStyles[level],
         }}
         className="puzzle-grid"
       >
@@ -132,33 +117,17 @@ const PuzzleGrid = ({
             ))
           )}
         </div>
-      </div>
 
-      {isSolved && (
-        <div
-          style={{
-            position: "fixed",
-            top: 0,
-            height: "100vh",
-            width: "100vw",
-            backgroundColor: "rgba(0, 0, 0, 0.56)",
-            display: "flex",
-            flexDirection: "column",
-            gap: "1rem",
-            alignItems: "center",
-            justifyContent: "center",
-            zIndex: 1000,
-          }}
-        >
-          <div className="congrats-tile">
-            <FaHandsClapping />
-            Level Solved!
+        <>
+          <div className={canPlay ? "modal" : "modal visible"} id="game-modal">
+            <div className="modal-content">
+              <button className="btn" onClick={startGame}>
+                Start Solving
+              </button>
+            </div>
           </div>
-          <button className="play-again-btn" onClick={resetGame}>
-            PLAY AGAIN
-          </button>
-        </div>
-      )}
+        </>
+      </div>
     </>
   );
 };
