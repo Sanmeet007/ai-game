@@ -107,10 +107,17 @@ const PuzzleGrid = ({
         </div>
 
         <>
-          <div className={canPlay ? "modal" : "modal visible"} id="game-modal">
+          <div
+            className={canPlay ? "modal" : "modal visible"}
+            id="game-modal"
+            style={{
+              borderRadius: "20px",
+              position: "absolute",
+            }}
+          >
             <div className="modal-content">
               <button className="btn" onClick={startGame}>
-                Start Solving
+                Start Challenge
               </button>
             </div>
           </div>

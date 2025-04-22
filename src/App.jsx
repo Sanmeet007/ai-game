@@ -11,6 +11,7 @@ import GameStats from "./components/GameStats";
 import GameRules from "./components/GameRules";
 import { useLevelStorage } from "./hooks/useLevelStroage";
 import { levelDetails } from "./utils/level-fns";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 let initialBoard = PuzzleSolver.getRandomState();
 
@@ -19,7 +20,7 @@ const App = () => {
   const { currentLevel, setCurrentLevel } = useLevelContext();
 
   const [board, setBoard] = useState(initialBoard);
-
+  const [isSolving, setIsSolving] = useState(false);
   const [isSolved, setIsSolved] = useState(false);
   const [canPlay, setCanPlay] = useState(false);
   const [timer, setTimer] = useState(null);
@@ -53,10 +54,14 @@ const App = () => {
   };
 
   const handleSolve = async () => {
+    setIsSolving(true);
     const path = await PuzzleSolver.solve(board);
+    setIsSolving(false);
+
     await animatePath(path, setBoard, () => {
       setMovesPlayed((x) => ++x);
     });
+
     setIsSolved(true);
   };
 
@@ -169,7 +174,6 @@ const App = () => {
           resetGame={handleReset}
         />
       </GameLayout>
-
       {isSolved && (
         <div
           style={{
@@ -195,6 +199,27 @@ const App = () => {
           </button>
         </div>
       )}
+
+      <div
+        className={!isSolving ? "modal" : "modal visible"}
+        style={{
+          flexDirection: "column",
+          gap: "1rem",
+        }}
+      >
+        <div className="rotate-loading">
+          <AiOutlineLoading3Quarters size={50} />
+        </div>
+
+        <div
+          className="modal-content"
+          style={{
+            fontSize: "1.5rem",
+          }}
+        >
+          Finding Solution
+        </div>
+      </div>
     </>
   );
 };

@@ -331,14 +331,13 @@ button {
   margin-bottom: 2rem;
 }
 .modal {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(10px);
-  border-radius: 20px;
   padding: 1rem;
   display: flex;
   align-items: center;
@@ -435,4 +434,20 @@ button:disabled:focus-visible {
 button:disabled {
   background-color: #756b3f !important;
   color: rgb(32, 32, 32);
+}
+.rotate-loading {
+  color: #e8ffa4;
+  height: 50px;
+  width: 50px;
+  transform-origin: center;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
