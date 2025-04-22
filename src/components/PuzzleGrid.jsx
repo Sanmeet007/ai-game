@@ -76,7 +76,7 @@ const PuzzleGrid = ({
     <>
       <div
         style={{
-          animation: isSolved ? "glow 1s infinite alternate" : "none",
+          animation: isSolved ? "glow 1s ease-in" : "none",
         }}
         className="puzzle-grid"
       >
