@@ -56,10 +56,13 @@ const App = () => {
   const handleSolve = async () => {
     setIsSolving(true);
     await new Promise((resolve) => setTimeout(resolve, 2000));
-
     const path = await PuzzleSolver.solve(board);
     setIsSolving(false);
 
+    if (path === null) {
+      alert("No solution found!");
+      return;
+    }
     await animatePath(path, setBoard, () => {
       setMovesPlayed((x) => ++x);
     });
