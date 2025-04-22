@@ -10,7 +10,7 @@ const GameStats = ({ movesPlayed, gamePlayedTime }) => {
   return (
     <>
       <div className="game-stats">
-        <div className="title-line mb-1">LEVEL {currentLevel}</div>
+        <div className="title-line mb-1">PROGRESS</div>
         <div className="level-stats">
           <div className="stats-tile">
             <p className="title">Time</p>

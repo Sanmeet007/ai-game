@@ -27,6 +27,7 @@ body {
     ),
     url(/assets/background.png);
   color: white;
+  background-attachment: fixed;
 }
 
 a {
@@ -232,7 +233,6 @@ button {
 }
 .game-wrapper .main-component {
   padding: 1rem;
-  overflow-y: auto;
 }
 
 .game-wrapper .side-component {
@@ -425,7 +425,7 @@ button {
 button:disabled:hover {
   border-color: none;
   transform: scale(1);
-  cursor: not-allowed !important; 
+  cursor: not-allowed !important;
 }
 
 button:disabled:focus-visible {

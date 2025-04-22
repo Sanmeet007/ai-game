@@ -106,6 +106,15 @@ const App = () => {
     gamePlayedTime,
   ]);
 
+  const handleLevelChange = (e) => {
+    const selectedLevel = parseInt(e.target.value, 10);
+
+    if (selectedLevel === currentLevel) return;
+    
+    setCurrentLevel(selectedLevel);
+    handleReset();
+  };
+
   return (
     <>
       <GameLayout
@@ -114,6 +123,32 @@ const App = () => {
             <div className="game-bar">
               <LogoText width={180} height={40} />
               <GameRules />
+              <select
+                style={{
+                  padding: "0.5rem 1rem",
+                  fontSize: "1rem",
+                  borderRadius: "100px",
+                  fontFamily: "Poppins, sans-serif",
+                  fontWeight: 500,
+                  cursor: "pointer",
+                  appearance: "none",
+                  background: `url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2210%22 height=%2210%22 viewBox=%220 0 10 10%22 fill=%22none%22%3E%3Cpath fill=%22%23ffeb94%22 d=%22M5 8L1 4H9L5 8Z%22/%3E%3C/svg%3E') no-repeat right 1rem center, #1d200e`,
+                  backgroundSize: "10px",
+                  backgroundPosition: "right 1rem center",
+                }}
+                onChange={handleLevelChange}
+                defaultValue={1}
+              >
+                <option value="" disabled>
+                  Select Level
+                </option>
+                {[1, 2, 3, 4, 5].map((level) => (
+                  <option key={level} value={level}>
+                    Level {level}
+                  </option>
+                ))}
+              </select>
+
               <GameStats
                 gamePlayedTime={gamePlayedTime}
                 movesPlayed={movesPlayed}
