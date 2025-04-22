@@ -17,7 +17,6 @@ class PuzzleSolver {
   }
 
   static solve = (initialBoard, gridSize = 3) => {
-    // Validate gridSize
     if (![3, 4, 5, 6, 7].includes(gridSize)) {
       throw new Error("Grid size must be between 3 and 7");
     }
