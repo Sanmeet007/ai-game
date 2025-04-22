@@ -60,7 +60,7 @@ const App = () => {
     setIsSolving(false);
 
     if (path === null) {
-      alert("No solution found!");
+      alert("No solution available for this layout. Reset to continue playing.");
       return;
     }
     await animatePath(path, setBoard, () => {
