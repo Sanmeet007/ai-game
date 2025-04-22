@@ -10,13 +10,16 @@ import { FaHandsClapping } from "react-icons/fa6";
 import GameStats from "./components/GameStats";
 import GameRules from "./components/GameRules";
 import { useLevelStorage } from "./hooks/useLevelStroage";
+import { levelDetails } from "./utils/level-fns";
 
-const initialBoard = PuzzleSolver.getRandomState();
+let initialBoard = PuzzleSolver.getRandomState();
 
 const App = () => {
   const { updateStats } = useLevelStorage();
   const { currentLevel, setCurrentLevel } = useLevelContext();
+
   const [board, setBoard] = useState(initialBoard);
+
   const [isSolved, setIsSolved] = useState(false);
   const [canPlay, setCanPlay] = useState(false);
   const [timer, setTimer] = useState(null);
@@ -112,6 +115,11 @@ const App = () => {
     if (selectedLevel === currentLevel) return;
     
     setCurrentLevel(selectedLevel);
+    const newBoard = PuzzleSolver.getRandomState(
+      levelDetails[selectedLevel].gridSize
+    );
+    initialBoard = newBoard;
+    setBoard(newBoard);
     handleReset();
   };
 

@@ -1,4 +1,6 @@
 import React, { useEffect } from "react";
+import { useLevelContext } from "../providers/LevelProvider";
+import { levelDetails } from "../utils/level-fns";
 
 const PuzzleGrid = ({
   board,
@@ -8,6 +10,9 @@ const PuzzleGrid = ({
   canPlay,
   startGame,
 }) => {
+  const { currentLevel } = useLevelContext();
+  const currentLevelDetails = levelDetails[currentLevel];
+
   const handleTileClick = (row, col) => {
     if (isSolved) return;
     const newBoard = JSON.parse(JSON.stringify(board));
@@ -53,25 +58,6 @@ const PuzzleGrid = ({
     }
   }, [solutionPath, setBoard, isSolved]);
 
-  if (
-    !board ||
-    !Array.isArray(board) ||
-    board.length !== 3 ||
-    board.some((row) => row.length !== 3)
-  ) {
-    return (
-      <div
-        style={{
-          color: "#ff4d4d",
-          fontFamily: "'Poppins', sans-serif",
-          fontSize: "20px",
-        }}
-      >
-        Error: Invalid puzzle board
-      </div>
-    );
-  }
-
   return (
     <>
       <div
@@ -82,9 +68,10 @@ const PuzzleGrid = ({
       >
         <div
           style={{
+            "--tile-size": `${currentLevelDetails.tileSize}`,
             display: "grid",
-            gridTemplateColumns: "repeat(3 ,var(--tile-size))",
-            gridTemplateRows: "repeat(3 ,var(--tile-size))",
+            gridTemplateColumns: `repeat(${currentLevelDetails.gridSize} ,var(--tile-size))`,
+            gridTemplateRows: `repeat(${currentLevelDetails.gridSize} ,var(--tile-size))`,
             border: "2px solid rgba(255, 255, 255, 0.16)",
             borderRadius: "10px",
             overflow: "hidden",
@@ -108,8 +95,10 @@ const PuzzleGrid = ({
                     tile !== 0 || isSolved ? "scale(1)" : "scale(0.95)",
                   backgroundImage:
                     isSolved && tile === 0
-                      ? `url(/assets/frames/frame-9.png)`
-                      : `url(/assets/frames/frame-${tile}.png)`,
+                      ? `url(/assets/frames/${
+                          currentLevelDetails.gridSize ** 2
+                        }.png)`
+                      : `url(/assets/frames/${currentLevelDetails.imagesFolder}/${tile}.png)`,
                   backgroundSize: "100% 100%",
                 }}
               ></div>

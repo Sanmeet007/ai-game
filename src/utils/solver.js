@@ -11,21 +11,23 @@ class PuzzleSolver {
     return goal;
   };
 
-  static #findEmptyTile = (board) => {
-    for (let i = 0; i < board.length; i++) {
-      for (let j = 0; j < board[i].length; j++) {
-        if (board[i][j] === 0) return { row: i, col: j };
-      }
-    }
-  };
-
   static getRandomState(gridSize = 3) {
     const arr = PuzzleSolver.#getGoalStateFromGridSize(gridSize);
     return PuzzleSolver.shuffle(arr);
   }
 
   static solve = (initialBoard, gridSize = 3) => {
-    const goal = PuzzleSolver.#getGoalStateFromGridSize(gridSize);
+    // Validate gridSize
+    if (![3, 4, 5, 6, 7].includes(gridSize)) {
+      throw new Error("Grid size must be between 3 and 7");
+    }
+
+    const goal = Array.from({ length: gridSize }, (_, i) =>
+      Array.from({ length: gridSize }, (_, j) => {
+        const value = i * gridSize + j + 1;
+        return value === gridSize * gridSize ? 0 : value;
+      })
+    );
 
     const boardToString = (board) => board.flat().join(",");
 
@@ -48,7 +50,17 @@ class PuzzleSolver {
 
     const getNeighbors = (board) => {
       const neighbors = [];
-      const { row, col } = PuzzleSolver.#findEmptyTile(board);
+      let row, col;
+      outer: for (let i = 0; i < gridSize; i++) {
+        for (let j = 0; j < gridSize; j++) {
+          if (board[i][j] === 0) {
+            row = i;
+            col = j;
+            break outer;
+          }
+        }
+      }
+
       const moves = [
         [row - 1, col],
         [row + 1, col],
@@ -82,12 +94,20 @@ class PuzzleSolver {
           if (flat[i] && flat[j] && flat[i] > flat[j]) inversions++;
         }
       }
-      
+
       if (gridSize % 2 === 1) {
         return inversions % 2 === 0;
       }
-      
-      const { row } = PuzzleSolver.#findEmptyTile(board);
+
+      let row;
+      outer: for (let i = 0; i < gridSize; i++) {
+        for (let j = 0; j < gridSize; j++) {
+          if (board[i][j] === 0) {
+            row = i;
+            break outer;
+          }
+        }
+      }
       return (inversions + row) % 2 === 1;
     };
 
@@ -164,22 +184,47 @@ class PuzzleSolver {
   };
 
   static shuffle = (board) => {
+    const gridSize = board.length;
+
+    if (![3, 4, 5, 6, 7].includes(gridSize)) {
+      throw new Error("Grid size must be between 3 and 7");
+    }
+
+    if (board.some((row) => row.length !== gridSize)) {
+      throw new Error(`Board must be ${gridSize}x${gridSize}`);
+    }
+
     const newBoard = JSON.parse(JSON.stringify(board));
-    for (let i = 0; i < 100; i++) {
-      const emptyPos = PuzzleSolver.#findEmptyTile(newBoard);
+
+    const findEmptyTile = (board) => {
+      for (let i = 0; i < gridSize; i++) {
+        for (let j = 0; j < gridSize; j++) {
+          if (board[i][j] === 0) {
+            return { row: i, col: j };
+          }
+        }
+      }
+      throw new Error("No empty tile found");
+    };
+
+    for (let i = 0; i < gridSize * gridSize * 10; i++) {
+      const emptyPos = findEmptyTile(newBoard);
       const possibleMoves = [
         [emptyPos.row - 1, emptyPos.col],
         [emptyPos.row + 1, emptyPos.col],
         [emptyPos.row, emptyPos.col - 1],
         [emptyPos.row, emptyPos.col + 1],
-      ].filter(([r, c]) => r >= 0 && r < 3 && c >= 0 && c < 3);
+      ].filter(([r, c]) => r >= 0 && r < gridSize && c >= 0 && c < gridSize);
+
       const [newRow, newCol] =
         possibleMoves[Math.floor(Math.random() * possibleMoves.length)];
+
       [newBoard[emptyPos.row][emptyPos.col], newBoard[newRow][newCol]] = [
         newBoard[newRow][newCol],
         newBoard[emptyPos.row][emptyPos.col],
       ];
     }
+
     return newBoard;
   };
 
