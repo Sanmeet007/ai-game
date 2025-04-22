@@ -55,8 +55,8 @@ const App = () => {
 
   const handleSolve = async () => {
     setIsSolving(true);
-    await Promise((resolve) => setTimeout(resolve, 2000));
-    
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+
     const path = await PuzzleSolver.solve(board);
     setIsSolving(false);
 
