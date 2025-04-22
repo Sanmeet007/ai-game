@@ -418,3 +418,18 @@ button {
   opacity: 0;
   visibility: hidden;
 }
+
+button:disabled:hover {
+  border-color: none;
+  transform: scale(1);
+  cursor: not-allowed !important; 
+}
+
+button:disabled:focus-visible {
+  outline: none;
+}
+
+button:disabled {
+  background-color: #756b3f !important;
+  color: rgb(32, 32, 32);
+}

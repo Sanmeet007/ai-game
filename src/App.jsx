@@ -123,6 +123,7 @@ const App = () => {
                 onSolve={handleSolve}
                 onReset={handleReset}
                 isSolved={isSolved}
+                canPlay={canPlay}
               />
             </div>
           </>
