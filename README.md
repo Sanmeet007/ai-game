@@ -1,12 +1,63 @@
-# React + Vite
+# Grid Bash
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Slide, Shuffle, and Solve – A Multi-Level 8-Puzzle Challenge**
 
-Currently, two official plugins are available:
+Grid Bash is a modern, browser-based sliding puzzle game that challenges players to solve increasingly complex grids using an A\* search algorithm. Built with React, the game offers multiple levels, real-time solving, and local performance tracking.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+<a href="https://reactjs.org/">
+<img src="https://img.shields.io/badge/React-61DAFB.svg?style=for-the-badge&logo=React&logoColor=white" alt="React Badge" width="70" height="18"/>
+</a>
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript">
+<img src="https://img.shields.io/badge/JavaScript-F7DF1E.svg?style=for-the-badge&logo=javascript&logoColor=black" alt="JavaScript Badge" width="90" height="18"/>
+</a>
+<a href="https://opensource.org/licenses/MIT">
+<img src="https://img.shields.io/badge/License-MIT-green.svg" alt="MIT License Badge" width="80" height="18"/>
+</a>
 
-## Expanding the ESLint configuration
+## 🧐 Key Features
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- **Multi-Level Gameplay**  
+  Progress through five levels with increasing difficulty:
+
+  - Level 1 → 3×3
+  - Level 2 → 4×4
+  - Level 3 → 5×5
+  - Level 4 → 6×6
+  - Level 5 → 7×7
+
+- **Smart Shuffle**  
+  Each grid is randomized but always solvable.
+
+- **Auto-Solver with A\***  
+  Visualize the A\* search algorithm in action solving any board state.
+
+- **Timer & Best Score Tracker**  
+  See how fast you can complete each level — best scores are saved in `localStorage`.
+
+- **Responsive, Minimal UI**  
+  Designed with a clean and intuitive layout for smooth interaction.
+
+## 👏 Benefits
+
+- Boost logical reasoning with increasing puzzle complexity.
+- Learn A\* algorithm mechanics in an interactive, visual way.
+- Challenge yourself and aim to beat your personal bests.
+- Instant play – just open in a browser, no installs needed.
+
+## 🚀 Screenshots
+
+![Screenshot-1](https://sanmeet007.github.io/public/grid-bash/screenshot-1.png)  
+![Screenshot-2](https://sanmeet007.github.io/public/grid-bash/screenshot-2.png)
+![Screenshot-3](https://sanmeet007.github.io/public/grid-bash/screenshot-3.png)
+![Screenshot-4](https://sanmeet007.github.io/public/grid-bash/screenshot-4.png)
+
+## 🛠️ Built With
+
+- [React](https://reactjs.org/) – Frontend framework
+- [JavaScript (ES6+)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+- A\* Pathfinding
+
+---
+<p>
+Built with ❤️ to sharpen minds and slide some tiles.
+</p>
