@@ -1,4 +1,9 @@
+import worker from "../workers/solver.worker";
+import WebWorker from "./WebWorker";
+
 class PuzzleSolver {
+  static workerInstance = new WebWorker(worker);
+
   static #getGoalStateFromGridSize = (gridSize = 3) => {
     const flat = Array.from(
       { length: gridSize ** 2 },
@@ -181,6 +186,26 @@ class PuzzleSolver {
 
     return null;
   };
+
+  static async solveUsingWorker(initialBoard, gridSize = 3) {
+    return new Promise((resolve, reject) => {
+      try {
+        PuzzleSolver.workerInstance.postMessage({
+          boardState: initialBoard,
+          gridSize,
+        });
+        PuzzleSolver.workerInstance.addEventListener(
+          "message",
+          (e) => {
+            resolve(e.data);
+          },
+          true
+        );
+      } catch (e) {
+        reject(e);
+      }
+    });
+  }
 
   static shuffle = (board) => {
     const gridSize = board.length;

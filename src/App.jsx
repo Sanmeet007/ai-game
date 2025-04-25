@@ -54,25 +54,39 @@ const App = () => {
   };
 
   const handleSolve = async () => {
-    setIsSolving(true);
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-    const path = await PuzzleSolver.solve(board);
-    setIsSolving(false);
+    try {
+      setIsSolving(true);
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+      const path = await PuzzleSolver.solveUsingWorker(board);
+      setIsSolving(false);
 
-    if (path === null) {
+      if (path === null) {
+        stopTimer();
+        setGamePlayedTime(0);
+        setMovesPlayed(0);
+        setIsSolved(false);
+
+        alert(
+          "No solution available for this layout. Reset to continue playing."
+        );
+        return;
+      }
+      await animatePath(path, setBoard, () => {
+        setMovesPlayed((x) => ++x);
+      });
+
+      setIsSolved(true);
+    } catch (e) {
+      console.error(e);
+
       stopTimer();
       setGamePlayedTime(0);
       setMovesPlayed(0);
-      setIsSolved(false);      
-      
-      alert("No solution available for this layout. Reset to continue playing.");
+      setIsSolved(false);
+
+      alert("Ah Snap! Something went wrong");
       return;
     }
-    await animatePath(path, setBoard, () => {
-      setMovesPlayed((x) => ++x);
-    });
-
-    setIsSolved(true);
   };
 
   const handleBoardUpdate = (newBoard) => {
