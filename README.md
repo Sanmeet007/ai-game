@@ -10,8 +10,8 @@ Grid Rush is a modern, browser-based sliding puzzle game that challenges players
 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript">
 <img src="https://img.shields.io/badge/JavaScript-F7DF1E.svg?style=for-the-badge&logo=javascript&logoColor=black" alt="JavaScript Badge" width="90" height="18"/>
 </a>
-<a href="https://opensource.org/licenses/MIT">
-<img src="https://img.shields.io/badge/License-MIT-green.svg" alt="MIT License Badge" width="80" height="18"/>
+<a href="https://www.gnu.org/licenses/gpl-3.0"> 
+  <img src="https://img.shields.io/badge/License-GPLv3-blue.svg" alt="GPLv3 License Badge" width="90" height="18"/> 
 </a>
 
 ## 🧐 Key Features
