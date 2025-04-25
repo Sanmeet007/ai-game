@@ -1,8 +1,8 @@
-# Grid Bash
+# Grid Rush
 
 **Slide, Shuffle, and Solve – A Multi-Level 8-Puzzle Challenge**
 
-Grid Bash is a modern, browser-based sliding puzzle game that challenges players to solve increasingly complex grids using an A\* search algorithm. Built with React, the game offers multiple levels, real-time solving, and local performance tracking.
+Grid Rush is a modern, browser-based sliding puzzle game that challenges players to solve increasingly complex grids using an A\* search algorithm. Built with React, the game offers multiple levels, real-time solving, and local performance tracking.
 
 <a href="https://reactjs.org/">
 <img src="https://img.shields.io/badge/React-61DAFB.svg?style=for-the-badge&logo=React&logoColor=white" alt="React Badge" width="70" height="18"/>
@@ -46,10 +46,10 @@ Grid Bash is a modern, browser-based sliding puzzle game that challenges players
 
 ## 🚀 Screenshots
 
-![Screenshot-1](https://sanmeet007.github.io/public/grid-bash/screenshot-1.png)  
-![Screenshot-2](https://sanmeet007.github.io/public/grid-bash/screenshot-2.png)
-![Screenshot-3](https://sanmeet007.github.io/public/grid-bash/screenshot-3.png)
-![Screenshot-4](https://sanmeet007.github.io/public/grid-bash/screenshot-4.png)
+![Screenshot-1](https://sanmeet007.github.io/public/grid-rush/screenshot-1.png)  
+![Screenshot-2](https://sanmeet007.github.io/public/grid-rush/screenshot-2.png)
+![Screenshot-3](https://sanmeet007.github.io/public/grid-rush/screenshot-3.png)
+![Screenshot-4](https://sanmeet007.github.io/public/grid-rush/screenshot-4.png)
 
 ## 🛠️ Built With
 
