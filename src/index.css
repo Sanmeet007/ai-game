@@ -160,12 +160,6 @@ button {
   height: calc(100vh - 4rem);
 }
 
-@media screen and (min-width: 200px) {
-  .puzzle-grid {
-    --tile-size: 10rem;
-  }
-}
-
 .controller-wrapper {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -449,5 +443,43 @@ button:disabled {
   }
   100% {
     transform: rotate(360deg);
+  }
+}
+
+.game-wrapper {
+  overflow: auto;
+}
+
+@media screen and (max-width: 1200px) {
+  .game-wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@media screen and (min-width: 700px) and (max-width: 1200px) {
+  .game-wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .game-bar {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  select {
+    order: 1;
+  }
+  .controller-wrapper {
+    order: 2;
+  }
+
+  .game-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    order: 3;
+    grid-column: 1 / span 2;
   }
 }
