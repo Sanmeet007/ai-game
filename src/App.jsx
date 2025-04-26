@@ -19,6 +19,7 @@ const App = () => {
   const { updateStats } = useLevelStorage();
   const { currentLevel, setCurrentLevel } = useLevelContext();
 
+  const [worker, setWorker] = useState(null);
   const [board, setBoard] = useState(initialBoard);
   const [isSolving, setIsSolving] = useState(false);
   const [isSolved, setIsSolved] = useState(false);
@@ -56,11 +57,35 @@ const App = () => {
   const handleSolve = async () => {
     try {
       setIsSolving(true);
-      await new Promise((resolve) => setTimeout(resolve, 2000));
-      const path = await PuzzleSolver.solveUsingWorker(board);
+
+      if (worker) worker.terminate();
+      const newWokerInstance = new Worker("worker.js");
+      
+      setWorker(newWokerInstance);
+
+      const solution = await PuzzleSolver.solve(
+        newWokerInstance,
+        {
+          size: board.length,
+          puzzle: board,
+          greedy: false, // true == ignore the treeLevel score
+          uniform: false, // true == ignore the heuristic score
+          heuristics: [
+            "manhattan",
+            "linearConflicts",
+            "hamming",
+            "euclidean",
+            "diagonal",
+            "gaschnig",
+          ], // the list of heuristics to use
+          queueType: "heapQ", // "heapQ"
+        },
+        board
+      );
+      const solutionPath = solution.steps.map((step) => step[0]);
       setIsSolving(false);
 
-      if (path === null) {
+      if (solutionPath === null) {
         stopTimer();
         setGamePlayedTime(0);
         setMovesPlayed(0);
@@ -71,7 +96,7 @@ const App = () => {
         );
         return;
       }
-      await animatePath(path, setBoard, () => {
+      await animatePath(solutionPath, setBoard, () => {
         setMovesPlayed((x) => ++x);
       });
 
@@ -167,7 +192,7 @@ const App = () => {
                 <option value="" disabled>
                   Select Level
                 </option>
-                {[1, 2, 3, 4, 5].map((level) => (
+                {[1, 2, 3].map((level) => (
                   <option key={level} value={level}>
                     Level {level}
                   </option>
