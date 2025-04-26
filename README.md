@@ -22,8 +22,6 @@ Grid Rush is a modern, browser-based sliding puzzle game that challenges players
   - Level 1 → 3×3
   - Level 2 → 4×4
   - Level 3 → 5×5
-  - Level 4 → 6×6
-  - Level 5 → 7×7
 
 - **Smart Shuffle**  
   Each grid is randomized but always solvable.
