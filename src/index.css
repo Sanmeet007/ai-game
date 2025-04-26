@@ -205,6 +205,17 @@ button {
   animation: fadeIn 0.5s;
   background-color: #1a1a1a86;
   backdrop-filter: blur(20px);
+  flex-direction: column;
+}
+
+.congrats-tile .flex {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.congrats-tile .info{
+  font-size: 0.8rem;
 }
 
 .play-again-btn {
@@ -491,6 +502,6 @@ button:disabled {
     grid-column: 1 / span 2;
   }
 }
-.controller-wrapper button{
+.controller-wrapper button {
   min-width: 100px;
 }

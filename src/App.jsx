@@ -10,7 +10,7 @@ import { FaHandsClapping } from "react-icons/fa6";
 import GameStats from "./components/GameStats";
 import GameRules from "./components/GameRules";
 import { useLevelStorage } from "./hooks/useLevelStroage";
-import { levelDetails } from "./utils/level-fns";
+import { formatSeconds, levelDetails } from "./utils/level-fns";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 let initialBoard = PuzzleSolver.getRandomState();
@@ -18,6 +18,10 @@ let initialBoard = PuzzleSolver.getRandomState();
 const App = () => {
   const { updateStats } = useLevelStorage();
   const { currentLevel, setCurrentLevel } = useLevelContext();
+  const [solvedData, setSolvedData] = useState({
+    time: 0,
+    moves: 0,
+  });
 
   const [worker, setWorker] = useState(null);
   const [board, setBoard] = useState(initialBoard);
@@ -60,7 +64,6 @@ const App = () => {
 
       if (worker) worker.terminate();
       const newWokerInstance = new Worker("worker.js");
-      
       setWorker(newWokerInstance);
 
       const solution = await PuzzleSolver.solve(
@@ -99,7 +102,6 @@ const App = () => {
       await animatePath(solutionPath, setBoard, () => {
         setMovesPlayed((x) => ++x);
       });
-
       setIsSolved(true);
     } catch (e) {
       console.error(e);
@@ -138,6 +140,9 @@ const App = () => {
   useEffect(() => {
     if (isSolved) {
       updateStats(currentLevel, gamePlayedTime, movesPlayed);
+
+      setSolvedData({ time: gamePlayedTime, moves: movesPlayed });
+
       stopTimer();
       setGamePlayedTime(0);
       setMovesPlayed(0);
@@ -149,6 +154,7 @@ const App = () => {
     currentLevel,
     movesPlayed,
     gamePlayedTime,
+    setSolvedData,
   ]);
 
   const handleLevelChange = (e) => {
@@ -240,8 +246,20 @@ const App = () => {
           }}
         >
           <div className="congrats-tile">
-            <FaHandsClapping />
-            Level Solved!
+            <div className="flex">
+              <FaHandsClapping />
+              Level Solved!
+            </div>
+            <div className="info">
+              <div className="flex gap-4">
+                <div className="px-3 py-1 bg-gray-100 rounded-full text-sm font-medium">
+                  🕒 Time: {formatSeconds(solvedData.time)}
+                </div>
+                <div className="px-3 py-1 bg-gray-100 rounded-full text-sm font-medium">
+                  🎯 Moves: {solvedData.moves}
+                </div>
+              </div>
+            </div>
           </div>
           <button className="play-again-btn" onClick={handleReset}>
             PLAY AGAIN
