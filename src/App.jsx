@@ -139,10 +139,10 @@ const App = () => {
 
   useEffect(() => {
     if (isSolved) {
-      updateStats(currentLevel, gamePlayedTime, movesPlayed);
-
-      setSolvedData({ time: gamePlayedTime, moves: movesPlayed });
-
+      const t = gamePlayedTime;
+      const m = movesPlayed;
+      updateStats(currentLevel, t, m);
+      setSolvedData({ time: t, moves: m });
       stopTimer();
       setGamePlayedTime(0);
       setMovesPlayed(0);
