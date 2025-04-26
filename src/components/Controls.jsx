@@ -7,7 +7,7 @@ const Controls = ({ onShuffle, onSolve, onReset, isSolved, canPlay }) => {
   return (
     <>
       <div className="controller-wrapper">
-        <button onClick={onShuffle} disabled={!canPlay}>
+        <button onClick={onShuffle} disabled={isSolved || !canPlay}>
           <CiShuffle />
           Shuffle
         </button>
@@ -21,7 +21,11 @@ const Controls = ({ onShuffle, onSolve, onReset, isSolved, canPlay }) => {
           <MdAutoFixHigh />
           Solve
         </button>
-        <button className="secondary" onClick={onReset} disabled={!canPlay}>
+        <button
+          className="secondary"
+          onClick={onReset}
+          disabled={isSolved || !canPlay}
+        >
           <RiResetLeftLine />
           Reset
         </button>
