@@ -95,10 +95,10 @@ const PuzzleGrid = ({
                     tile != 0 || isSolved ? "scale(1)" : "scale(0.95)",
                   backgroundImage:
                     isSolved && tile == 0
-                      ? `url(/assets/frames/${
+                      ? `url(./assets/frames/${
                           currentLevelDetails.imagesFolder
                         }/${currentLevelDetails.gridSize ** 2}.png)`
-                      : `url(/assets/frames/${currentLevelDetails.imagesFolder}/${tile}.png)`,
+                      : `url(./assets/frames/${currentLevelDetails.imagesFolder}/${tile}.png)`,
                   backgroundSize: "100% 100%",
                 }}
               ></div>
