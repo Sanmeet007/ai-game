@@ -145,7 +145,7 @@ button {
   }
 }
 
-.puzzle-grid {
+.puzzle-grid-wrapper {
   isolation: isolate;
   position: relative;
   display: flex;
@@ -454,6 +454,14 @@ button:disabled {
   .game-wrapper {
     display: flex;
     flex-direction: column;
+  }
+  .logo-text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .side-component {
+    border-radius: 0px !important;
   }
 }
 

@@ -1,6 +1,6 @@
 const LogoText = ({ width = 160, height = 90 }) => {
   return (
-    <div aria-label="Grid Rush">
+    <div aria-label="Grid Rush" className="logo-text">
       <svg
         width={width}
         height={height}

@@ -64,18 +64,19 @@ const PuzzleGrid = ({
         style={{
           animation: isSolved ? "glow 1s ease-in" : "none",
         }}
-        className="puzzle-grid"
+        className="puzzle-grid-wrapper"
       >
         <div
           style={{
-            "--tile-size": `${currentLevelDetails.tileSize}`,
-            display: "grid",
-            gridTemplateColumns: `repeat(${currentLevelDetails.gridSize} ,var(--tile-size))`,
-            gridTemplateRows: `repeat(${currentLevelDetails.gridSize} ,var(--tile-size))`,
             border: "2px solid rgba(255, 255, 255, 0.16)",
             borderRadius: "10px",
             overflow: "hidden",
+            display: 'grid',
+            gridTemplateColumns: `repeat(${currentLevelDetails.gridSize}, minmax(50px, 1fr))`,
+            width: 'min(90vw, 500px)', 
+            margin: '0 auto',
           }}
+          className="puzzle-grid"
         >
           {board.map((row, rowIndex) =>
             row.map((tile, colIndex) => (
@@ -86,19 +87,19 @@ const PuzzleGrid = ({
                   tile !== 0 && handleTileClick(rowIndex, colIndex)
                 }
                 style={{
+                  aspectRatio: 1,
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
                   cursor: tile !== 0 && !isSolved ? "pointer" : "default",
                   transition: "transform 0.2s, box-shadow 0.2s",
-                  transform:
-                    tile != 0 || isSolved ? "scale(1)" : "scale(0.95)",
+                  transform: tile != 0 || isSolved ? "scale(1)" : "scale(0.95)",
                   backgroundImage:
                     isSolved && tile == 0
-                      ? `url(./assets/frames/${
+                      ? `url(/ai-game/assets/frames/${
                           currentLevelDetails.imagesFolder
                         }/${currentLevelDetails.gridSize ** 2}.png)`
-                      : `url(./assets/frames/${currentLevelDetails.imagesFolder}/${tile}.png)`,
+                      : `url(/ai-game/assets/frames/${currentLevelDetails.imagesFolder}/${tile}.png)`,
                   backgroundSize: "100% 100%",
                 }}
               ></div>
