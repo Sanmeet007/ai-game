@@ -22,14 +22,4 @@ export const levelDetails = {
     imagesFolder: "5x5",
     tileSize: "6rem",
   },
-  4: {
-    gridSize: 6,
-    imagesFolder: "6x6",
-    tileSize: "5rem",
-  },
-  5: {
-    gridSize: 7,
-    imagesFolder: "7x7",
-    tileSize: "4rem",
-  },
 };

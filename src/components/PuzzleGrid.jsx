@@ -92,9 +92,9 @@ const PuzzleGrid = ({
                   cursor: tile !== 0 && !isSolved ? "pointer" : "default",
                   transition: "transform 0.2s, box-shadow 0.2s",
                   transform:
-                    tile !== 0 || isSolved ? "scale(1)" : "scale(0.95)",
+                    tile != 0 || isSolved ? "scale(1)" : "scale(0.95)",
                   backgroundImage:
-                    isSolved && tile === 0
+                    isSolved && tile == 0
                       ? `url(/assets/frames/${
                           currentLevelDetails.imagesFolder
                         }/${currentLevelDetails.gridSize ** 2}.png)`
