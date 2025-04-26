@@ -491,3 +491,6 @@ button:disabled {
     grid-column: 1 / span 2;
   }
 }
+.controller-wrapper button{
+  min-width: 100px;
+}
