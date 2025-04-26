@@ -63,7 +63,7 @@ const App = () => {
       setIsSolving(true);
 
       if (worker) worker.terminate();
-      const newWokerInstance = new Worker("worker.js");
+      const newWokerInstance = new Worker("/ai-game/worker.js");
       setWorker(newWokerInstance);
 
       const solution = await PuzzleSolver.solve(
